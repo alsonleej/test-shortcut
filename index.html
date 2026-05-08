@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Visitor Registration</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: Inter, Arial, sans-serif;
+      background: #f5f6f8;
+      color: #111827;
+    }
+
+    .card {
+      max-width: 480px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: 24px;
+    }
+
+    form {
+      display: grid;
+      gap: 12px;
+    }
+
+    fieldset {
+      margin: 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+    }
+
+    legend {
+      padding: 0 6px;
+      font-size: 13px;
+      color: #374151;
+      font-weight: 700;
+    }
+
+    label {
+      display: grid;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    input {
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 6px;
+      border: 0;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      background: #2563eb;
+      cursor: pointer;
+    }
+
+    .message {
+      min-height: 20px;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Register Visitor</h1>
+    <form id="register-form">
+      <label for="name">Name
+        <input id="name" name="name" autocomplete="name" required />
+      </label>
+      <label for="reason">Reason
+        <input id="reason" name="reason" required />
+      </label>
+      <label for="host">Host
+        <input id="host" name="host" required />
+      </label>
+      <label for="containerPadding">Container Padding
+        <input id="containerPadding" name="containerPadding" value="20px 10px" required />
+      </label>
+      <label for="nameCompactFontSize">Name Compact Font Size
+        <input id="nameCompactFontSize" name="nameCompactFontSize" value="48px" required />
+      </label>
+      <label for="reasonCompactFontSize">Reason Compact Font Size
+        <input id="reasonCompactFontSize" name="reasonCompactFontSize" value="48px" required />
+      </label>
+      <button type="submit">Print Badge</button>
+    </form>
+    <p id="status" class="message"></p>
+  </main>
+
+  <script type="module" src="./registerPage.js"></script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+
+<head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+    @page {
+      size: 69.93mm 49.95mm;
+      margin: 0;
+    }
+
+    @media print {
+
+      html,
+      body {
+        width: 69.93mm;
+        height: 49.95mm;
+        overflow: hidden;
+      }
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f5f5f5;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      padding: 20px 50px;
+      box-sizing: border-box;
+      font-family: "Inter", sans-serif;
+      background: white;
+    }
+
+    .logo-container {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      width: 100%;
+      height: 100px;
+    }
+
+    .logo {
+      width: 100px;
+      height: auto;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .visitor-information {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .main-text {
+      font-size: 52px;
+      font-weight: 500;
+      line-height: 52px;
+      letter-spacing: -1.82px;
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+      white-space: normal;
+      max-width: 100%;
+    }
+
+    .name {
+      color: black;
+      margin-bottom: 5px;
+    }
+
+    .reason {
+      color: #67686e;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      font-size: 24px;
+      line-height: 32px;
+      font-weight: 500;
+      letter-spacing: -0.24px;
+      width: 100%;
+      border-top: 2.15px solid #c9cbd1;
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+
+    .host-section {
+      text-align: left;
+      overflow-wrap: break-word;
+      white-space: normal;
+      max-width: 100%;
+    }
+
+    .date-section {
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .footer-label {
+      color: #67686e;
+    }
+
+    .footer-content {
+      color: black;
+    }
+
+    .qr-code {
+      width: 360px;
+      height: auto;
+      flex: 0 0 360px;
+    }
+  </style>
+</head>
+
+<body>
+  <svg width="826px" height="590px" viewBox="0 0 826 590" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="826" height="590" rx="8" fill="white" />
+    <foreignObject x="0" y="0" width="826" height="590">
+      <div xmlns="http://www.w3.org/1999/xhtml" class="container">
+        <div class="logo-container">
+          {% if logo %}
+          <img class="logo" src="{{logo}}" />
+          {% endif %}
+        </div>
+        <div class="main-content">
+          {% if qrCode %}
+          <img class="qr-code" src="{{qrCode}}" />
+          {% endif %}
+          <div class="visitor-information">
+            <div id="name" class="main-text name">{{name}}</div>
+            <div id="reason" class="main-text reason">{{reason}}</div>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="host-section">
+            <div class="footer-label">Invited By:</div>
+            <div class="footer-content">{{host}}</div>
+          </div>
+          <div class="date-section">
+            <div class="footer-label">Visit Date:</div>
+            <div class="footer-content">{{ "now" | date: "%Y-%m-%d" }}</div>
+          </div>
+        </div>
+      </div>
+    </foreignObject>
+  </svg>
+</body>
+
+</html>
