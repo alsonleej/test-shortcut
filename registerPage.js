@@ -17,13 +17,9 @@ function isValidCssFontSize(value) {
   return CSS.supports("font-size", value);
 }
 
-function isValidCssFontFamily(value) {
-  return CSS.supports("font-family", value);
-}
-
 function applyTemplateStyleOverrides(
   html,
-  { containerPadding, nameCompactFontSize, reasonCompactFontSize, fontFamily }
+  { containerPadding, nameCompactFontSize, reasonCompactFontSize }
 ) {
   return html
     .replace("padding: 20px 50px;", `padding: ${containerPadding};`)
@@ -34,10 +30,6 @@ function applyTemplateStyleOverrides(
     .replace(
       /\.reason\.compact\s*\{\s*font-size:\s*[^;]+;/,
       `.reason.compact {\n      font-size: ${reasonCompactFontSize};`
-    )
-    .replace(
-      /\.main-text\s*\{[\s\S]*?font-family:\s*[^;]+;/,
-      (match) => match.replace(/font-family:\s*[^;]+;/, `font-family: ${fontFamily};`)
     );
 }
 
@@ -59,7 +51,6 @@ if (form) {
     const containerPadding = String(formData.get("containerPadding") ?? "").trim();
     const nameCompactFontSize = String(formData.get("nameCompactFontSize") ?? "").trim();
     const reasonCompactFontSize = String(formData.get("reasonCompactFontSize") ?? "").trim();
-    const fontFamily = String(formData.get("fontFamily") ?? "").trim();
 
     if (
       !name ||
@@ -67,8 +58,7 @@ if (form) {
       !host ||
       !containerPadding ||
       !nameCompactFontSize ||
-      !reasonCompactFontSize ||
-      !fontFamily
+      !reasonCompactFontSize
     ) {
       setStatus("Please fill all fields.", true);
       return;
@@ -79,10 +69,6 @@ if (form) {
     }
     if (!isValidCssFontSize(nameCompactFontSize) || !isValidCssFontSize(reasonCompactFontSize)) {
       setStatus('Compact font size must be a valid CSS font-size (example: "48px").', true);
-      return;
-    }
-    if (!isValidCssFontFamily(fontFamily)) {
-      setStatus("Font family must be a valid CSS font-family value.", true);
       return;
     }
 
@@ -100,7 +86,6 @@ if (form) {
         containerPadding,
         nameCompactFontSize,
         reasonCompactFontSize,
-        fontFamily,
       });
       printBadge(badgeHtmlWithStyleOverrides, `Visitor Badge - ${name}`);
       setStatus("Print request sent to Android.");

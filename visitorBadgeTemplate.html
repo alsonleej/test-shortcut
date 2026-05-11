@@ -137,17 +137,13 @@
     <foreignObject x="0" y="0" width="826" height="590">
       <div xmlns="http://www.w3.org/1999/xhtml" class="container">
         <div class="logo-container">
-          {% if logo %}
-          <img class="logo" src="{{logo}}" />
-          {% endif %}
+          <img class="logo" src="logo.png" alt="Company logo" />
         </div>
         <div class="main-content">
-          {% if qrCode %}
-          <img class="qr-code" src="{{qrCode}}" />
-          {% endif %}
+          <img class="qr-code" src="qr.png" alt="Visitor QR code" />
           <div class="visitor-information">
-            <div id="name" class="main-text name">{{name}}</div>
-            <div id="reason" class="main-text reason">{{reason}}</div>
+            <div id="name" class="main-text name{{nameCompactClass}}">{{name}}</div>
+            <div id="reason" class="main-text reason{{reasonCompactClass}}">{{reason}}</div>
           </div>
         </div>
         <div class="footer">
@@ -157,7 +153,8 @@
           </div>
           <div class="date-section">
             <div class="footer-label">Visit Date:</div>
-            <div class="footer-content">{{ "now" | date: "%Y-%m-%d" }}</div>
+            <!-- <div class="footer-content">{{ "now" | date: "%Y-%m-%d" }}</div> -->
+            <div class="footer-content">Apr 28, 2026, 8:00 AM - Apr 69, 2027, 67:00 PM</div>
           </div>
         </div>
       </div>
