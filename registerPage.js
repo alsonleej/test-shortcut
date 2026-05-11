@@ -22,7 +22,7 @@ function applyTemplateStyleOverrides(
   { containerPadding, nameCompactFontSize, reasonCompactFontSize }
 ) {
   return html
-    .replace("padding: 20px 50px;", `padding: ${containerPadding};`)
+    .replace("padding: 20px 10px;", `padding: ${containerPadding};`)
     .replace(
       /\.name\.compact\s*\{\s*font-size:\s*[^;]+;/,
       `.name.compact {\n      font-size: ${nameCompactFontSize};`
