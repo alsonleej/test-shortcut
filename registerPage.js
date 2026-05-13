@@ -74,18 +74,21 @@ if (form) {
 
     try {
       const templateHtml = await loadBadgeTemplate();
-      const templateWithImages = await embedBadgeImagesAsDataUris(templateHtml);
-      const badgeHtml = await renderBadgeTemplate(templateWithImages, {
+      const badgeHtml = await renderBadgeTemplate(templateHtml, {
         name,
         reason,
         host,
       });
-      const badgeHtmlWithStyleOverrides = applyTemplateStyleOverrides(badgeHtml, {
+      const badgeWithImages = await embedBadgeImagesAsDataUris(badgeHtml);
+      const badgeHtmlWithStyleOverrides = applyTemplateStyleOverrides(badgeWithImages, {
         containerPadding,
         nameCompactFontSize,
         reasonCompactFontSize,
       });
-      printBadge(badgeHtmlWithStyleOverrides, `Visitor Badge - ${name}`);
+      if (!printBadge(badgeHtmlWithStyleOverrides, `Visitor Badge - ${name}`)) {
+        setStatus("Android print bridge is not available.", true);
+        return;
+      }
       setStatus("Print request sent to Android.");
     } catch (error) {
       setStatus(error instanceof Error ? error.message : "Unexpected error.", true);

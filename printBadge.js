@@ -1,6 +1,13 @@
-import { Liquid } from "./node_modules/liquidjs/dist/liquid.browser.mjs";
+let liquidEnginePromise;
 
-const liquidEngine = new Liquid();
+async function getLiquidEngine() {
+  if (!liquidEnginePromise) {
+    liquidEnginePromise = import("./liquidjs.browser.mjs").then(
+      ({ Liquid }) => new Liquid()
+    );
+  }
+  return liquidEnginePromise;
+}
 
 /**
  * Fetches a PNG and returns a data URL: `data:image/png;base64,<raw base64>`.
@@ -41,12 +48,15 @@ export async function embedBadgeImagesAsDataUris(templateHtml) {
 }
 
 export async function renderBadgeTemplate(templateHtml, values) {
+  const liquidEngine = await getLiquidEngine();
   return liquidEngine.parseAndRender(templateHtml, values);
 }
 
 export function printBadge(badgeHtml, newTitle) {
   const androidBridge = window?.Android;
-  if (typeof androidBridge?.printPage === "function") {
-    androidBridge.printPage(badgeHtml, newTitle);
+  if (typeof androidBridge?.printPage !== "function") {
+    return false;
   }
+  androidBridge.printPage(badgeHtml, newTitle);
+  return true;
 }
