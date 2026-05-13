@@ -51,8 +51,8 @@
     }
 
     .logo {
-      width: 100px;
-      height: auto;
+      width: auto;
+      height: 50px;
     }
 
     .main-content {
@@ -153,18 +153,18 @@
         <div class="main-content">
           <img class="qr-code" src="qr.png" alt="Visitor QR code" />
           <div class="visitor-information">
-            <div id="name" class="main-text name{{nameCompactClass}}">{{name}}</div>
-            <div id="reason" class="main-text reason{{reasonCompactClass}}">{{reason}}</div>
+            <div id="name" class="main-text name{% if name.size > 10 %} compact{% endif %}">{{ name }}</div>
+            <div id="reason" class="main-text reason{% if reason.size > 10 %} compact{% endif %}">{{ reason }}</div>
           </div>
         </div>
         <div class="footer">
           <div class="host-section">
             <div class="footer-label">Invited By:</div>
-            <div class="footer-content">{{host}}</div>
+            <div class="footer-content">{{ host }}</div>
           </div>
           <div class="date-section">
             <div class="footer-label">Visit Date:</div>
-            <!-- <div class="footer-content">{{ "now" | date: "%Y-%m-%d" }}</div> -->
+            <!-- Visit date: static placeholder until wired to Liquid -->
             <div class="footer-content">Apr 28, 2026, 8:00 AM - Apr 69, 2027, 67:00 PM</div>
           </div>
         </div>

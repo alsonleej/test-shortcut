@@ -1,11 +1,6 @@
-function escapeHtml(value) {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
-}
+import { Liquid } from "./node_modules/liquidjs/dist/liquid.browser.mjs";
+
+const liquidEngine = new Liquid();
 
 /**
  * Fetches a PNG and returns a data URL: `data:image/png;base64,<raw base64>`.
@@ -45,12 +40,9 @@ export async function embedBadgeImagesAsDataUris(templateHtml) {
   return html;
 }
 
-export function renderBadgeTemplate(templateHtml, values) {
-  return Object.entries(values).reduce(
-    (html, [key, value]) => html.replaceAll(`{{${key}}}`, escapeHtml(String(value))),
-    templateHtml
-  );
-} 
+export async function renderBadgeTemplate(templateHtml, values) {
+  return liquidEngine.parseAndRender(templateHtml, values);
+}
 
 export function printBadge(badgeHtml, newTitle) {
   const androidBridge = window?.Android;

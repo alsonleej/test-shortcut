@@ -75,12 +75,10 @@ if (form) {
     try {
       const templateHtml = await loadBadgeTemplate();
       const templateWithImages = await embedBadgeImagesAsDataUris(templateHtml);
-      const badgeHtml = renderBadgeTemplate(templateWithImages, {
+      const badgeHtml = await renderBadgeTemplate(templateWithImages, {
         name,
         reason,
         host,
-        nameCompactClass: name.length > 10 ? " compact" : "",
-        reasonCompactClass: reason.length > 10 ? " compact" : "",
       });
       const badgeHtmlWithStyleOverrides = applyTemplateStyleOverrides(badgeHtml, {
         containerPadding,

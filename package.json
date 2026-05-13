@@ -1,0 +1,24 @@
+{
+  "name": "test-shortcut",
+  "version": "1.0.0",
+  "description": "",
+  "main": "printBadge.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alsonleej/test-shortcut.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/alsonleej/test-shortcut/issues"
+  },
+  "homepage": "https://github.com/alsonleej/test-shortcut#readme",
+  "dependencies": {
+    "liquidjs": "^10.25.7"
+  }
+}
