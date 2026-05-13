@@ -1,12 +1,14 @@
-let liquidEnginePromise;
+let liquidEngine;
 
-async function getLiquidEngine() {
-  if (!liquidEnginePromise) {
-    liquidEnginePromise = import("./liquidjs.browser.mjs").then(
-      ({ Liquid }) => new Liquid()
-    );
+function getLiquidEngine() {
+  if (!liquidEngine) {
+    const Liquid = window?.liquidjs?.Liquid;
+    if (!Liquid) {
+      throw new Error("Liquid template engine failed to load.");
+    }
+    liquidEngine = new Liquid();
   }
-  return liquidEnginePromise;
+  return liquidEngine;
 }
 
 /**
@@ -48,7 +50,7 @@ export async function embedBadgeImagesAsDataUris(templateHtml) {
 }
 
 export async function renderBadgeTemplate(templateHtml, values) {
-  const liquidEngine = await getLiquidEngine();
+  const liquidEngine = getLiquidEngine();
   return liquidEngine.parseAndRender(templateHtml, values);
 }
 
