@@ -12,7 +12,8 @@ function getLiquidEngine() {
 }
 
 /**
- * Fetches a PNG and returns a data URL: `data:image/png;base64,<raw base64>`.
+ * Loads an image and re-encodes it as a PNG data URL so the print path gets a
+ * consistent RGBA bitmap instead of source-specific PNG variants.
  */
 async function fetchPngAsDataUri(relativeUrl) {
   const response = await fetch(relativeUrl, { cache: "no-store" });
@@ -20,12 +21,26 @@ async function fetchPngAsDataUri(relativeUrl) {
     throw new Error(`Could not load image: ${relativeUrl}`);
   }
   const blob = await response.blob();
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => resolve(reader.result);
-    reader.onerror = () => reject(reader.error ?? new Error("Failed to read image as base64."));
-    reader.readAsDataURL(blob);
-  });
+  let imageBitmap;
+  try {
+    imageBitmap = await createImageBitmap(blob);
+  } catch {
+    throw new Error(`Could not decode image: ${relativeUrl}`);
+  }
+
+  try {
+    const canvas = document.createElement("canvas");
+    canvas.width = imageBitmap.width;
+    canvas.height = imageBitmap.height;
+    const context = canvas.getContext("2d");
+    if (!context) {
+      throw new Error(`Could not create drawing context for ${relativeUrl}`);
+    }
+    context.drawImage(imageBitmap, 0, 0);
+    return canvas.toDataURL("image/png");
+  } finally {
+    imageBitmap.close();
+  }
 }
 
 /**
