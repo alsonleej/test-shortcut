@@ -4,6 +4,7 @@
   "description": "",
   "main": "printBadge.js",
   "scripts": {
+    "generate:terms-pdf": "node scripts/generateTermsPdf.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +20,8 @@
   },
   "homepage": "https://github.com/alsonleej/test-shortcut#readme",
   "dependencies": {
-    "liquidjs": "^10.25.7"
+    "liquidjs": "^10.25.7",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^5.7.284"
   }
 }

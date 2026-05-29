@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Visitor Registration</title>
+  <link rel="stylesheet" href="./pdfjs/web/pdf_viewer.css" />
   <style>
     body {
       margin: 0;
@@ -80,6 +81,68 @@
       margin-top: 12px;
       font-size: 14px;
     }
+
+    .pdf-card {
+      max-width: 480px;
+      margin: 20px auto 0;
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .pdf-card h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+
+    .pdf-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .pdf-toolbar button {
+      margin-top: 0;
+      padding: 8px 12px;
+      font-size: 14px;
+      background: #374151;
+    }
+
+    .pdf-toolbar button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    #pdf-page-label {
+      margin-left: auto;
+      font-size: 13px;
+      color: #4b5563;
+      font-weight: 600;
+    }
+
+    #pdf-viewer-container {
+      height: 420px;
+      overflow: auto;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background: #525659;
+      position: relative;
+    }
+
+    #pdf-viewer-container .pdfViewer .page {
+      margin: 12px auto;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    #pdf-status {
+      min-height: 18px;
+      margin-top: 10px;
+      font-size: 13px;
+      color: #4b5563;
+    }
   </style>
 </head>
 <body>
@@ -109,7 +172,23 @@
     <p id="status" class="message"></p>
   </main>
 
+  <section class="pdf-card" aria-label="Terms and conditions">
+    <h2>Terms and Conditions</h2>
+    <div class="pdf-toolbar">
+      <button type="button" id="pdf-prev-page">Previous</button>
+      <button type="button" id="pdf-next-page">Next</button>
+      <button type="button" id="pdf-zoom-out">Zoom out</button>
+      <button type="button" id="pdf-zoom-in">Zoom in</button>
+      <span id="pdf-page-label"></span>
+    </div>
+    <div id="pdf-viewer-container">
+      <div id="pdf-viewer" class="pdfViewer"></div>
+    </div>
+    <p id="pdf-status"></p>
+  </section>
+
   <script src="./liquidjs.browser.min.js"></script>
   <script type="module" src="./registerPage.js"></script>
+  <script type="module" src="./pdfViewer.js"></script>
 </body>
 </html>
