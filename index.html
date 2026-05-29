@@ -170,22 +170,22 @@
       <button type="submit">Print Badge</button>
     </form>
     <p id="status" class="message"></p>
+  
+    <section class="pdf-card" aria-label="Terms and conditions">
+      <h2>Terms and Conditions</h2>
+      <div class="pdf-toolbar">
+        <button type="button" id="pdf-prev-page">Previous</button>
+        <button type="button" id="pdf-next-page">Next</button>
+        <button type="button" id="pdf-zoom-out">Zoom out</button>
+        <button type="button" id="pdf-zoom-in">Zoom in</button>
+        <span id="pdf-page-label"></span>
+      </div>
+      <div id="pdf-viewer-container">
+        <div id="pdf-viewer" class="pdfViewer"></div>
+      </div>
+      <p id="pdf-status"></p>
+    </section>
   </main>
-  <h3>Terms and Conditions</h3>
-  <section class="pdf-card" aria-label="Terms and conditions">
-    <h2>Terms and Conditions</h2>
-    <div class="pdf-toolbar">
-      <button type="button" id="pdf-prev-page">Previous</button>
-      <button type="button" id="pdf-next-page">Next</button>
-      <button type="button" id="pdf-zoom-out">Zoom out</button>
-      <button type="button" id="pdf-zoom-in">Zoom in</button>
-      <span id="pdf-page-label"></span>
-    </div>
-    <div id="pdf-viewer-container">
-      <div id="pdf-viewer" class="pdfViewer"></div>
-    </div>
-    <p id="pdf-status"></p>
-  </section>
 
   <script src="./liquidjs.browser.min.js"></script>
   <script type="module" src="./registerPage.js"></script>
